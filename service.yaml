@@ -1,13 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: health-check
-  namespace: default
+  name: minikube-service
 spec:
   selector:
-    app: health-check
+    app: minikube-service
   ports:
     - protocol: TCP
-      port: 8000
+      port: 80
       targetPort: 8000
   type: ClusterIP
