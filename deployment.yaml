@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: minikube-service
+  namespace: m
 spec:
   replicas: 2
   selector:
@@ -16,16 +17,20 @@ spec:
         - name: minikube-service
           image: danielpalm/php-healthcheck-service:latest
           ports:
-            - containerPort: 8000
+            - containerPort: 80
           livenessProbe:
             httpGet:
               path: /health
-              port: 8000
-            initialDelaySeconds: 5
-            periodSeconds: 10
+              port: 80
+            initialDelaySeconds: 10
+            periodSeconds: 20
+            timeoutSeconds: 5
+            failureThreshold: 5
           readinessProbe:
             httpGet:
               path: /health
-              port: 8000
-            initialDelaySeconds: 5
-            periodSeconds: 10
+              port: 80
+            initialDelaySeconds: 10
+            periodSeconds: 20
+            timeoutSeconds: 5
+            failureThreshold: 5

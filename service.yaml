@@ -2,6 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: minikube-service
+  namespace: m
 spec:
   selector:
     app: minikube-service

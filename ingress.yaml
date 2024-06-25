@@ -2,6 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: minikube-ingress
+  namespace: m
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
@@ -11,14 +12,7 @@ spec:
       http:
         paths:
           - path: /health
-            pathType: Prefix
-            backend:
-              service:
-                name: minikube-service
-                port:
-                  number: 80
-          - path: /otusapp/health
-            pathType: Prefix
+            pathType: ImplementationSpecific
             backend:
               service:
                 name: minikube-service
