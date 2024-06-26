@@ -3,14 +3,23 @@ kind: Ingress
 metadata:
   name: minikube-ingress
   namespace: m
+  annotations:
+    nginx.ingress.kubernetes.io/use-regex: "true"
 spec:
   ingressClassName: nginx
   rules:
     - host: arch.homework
       http:
         paths:
+          - path: /otusapp/([^/]+)/health
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: minikube-service
+                port:
+                  number: 80
           - path: /health
-            pathType: Exact
+            pathType: ImplementationSpecific
             backend:
               service:
                 name: minikube-service
