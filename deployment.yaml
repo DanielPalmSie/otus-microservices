@@ -1,36 +1,34 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: minikube-service
-  namespace: m
+  name: php-healthcheck-deployment
+  labels:
+    app: php-healthcheck
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: minikube-service
+      app: php-healthcheck
   template:
     metadata:
       labels:
-        app: minikube-service
+        app: php-healthcheck
     spec:
       containers:
-        - name: minikube-service
+        - name: php-healthcheck
           image: danielpalm/php-healthcheck-service:latest
+          imagePullPolicy: Always
           ports:
-            - containerPort: 80
+            - containerPort: 8000
           livenessProbe:
             httpGet:
               path: /health
-              port: 80
+              port: 8000
             initialDelaySeconds: 10
-            periodSeconds: 20
             timeoutSeconds: 5
-            failureThreshold: 5
           readinessProbe:
             httpGet:
               path: /health
-              port: 80
+              port: 8000
             initialDelaySeconds: 10
-            periodSeconds: 20
             timeoutSeconds: 5
-            failureThreshold: 5
