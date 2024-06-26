@@ -1,0 +1,51 @@
+{
+	"info": {
+		"_postman_id": "7bda4bdb-a0b7-46db-a8a5-065a941e02d3",
+		"name": "ingress",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6160005"
+	},
+	"item": [
+		{
+			"name": "forward path",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://arch.homework/otusapp/daniel/health",
+					"protocol": "http",
+					"host": [
+						"arch",
+						"homework"
+					],
+					"path": [
+						"otusapp",
+						"daniel",
+						"health"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "original request",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://arch.homework/otusapp/health",
+					"protocol": "http",
+					"host": [
+						"arch",
+						"homework"
+					],
+					"path": [
+						"otusapp",
+						"health"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
