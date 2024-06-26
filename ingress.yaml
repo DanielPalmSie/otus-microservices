@@ -3,8 +3,6 @@ kind: Ingress
 metadata:
   name: minikube-ingress
   namespace: m
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   ingressClassName: nginx
   rules:
@@ -12,7 +10,7 @@ spec:
       http:
         paths:
           - path: /health
-            pathType: ImplementationSpecific
+            pathType: Exact
             backend:
               service:
                 name: minikube-service

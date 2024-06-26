@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: php-healthcheck-deployment
+  namespace: m
   labels:
     app: php-healthcheck
 spec:

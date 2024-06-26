@@ -5,7 +5,7 @@ metadata:
   namespace: m
 spec:
   selector:
-    app: minikube-service
+    app: php-healthcheck
   ports:
     - protocol: TCP
       port: 80
