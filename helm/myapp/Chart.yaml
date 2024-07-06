@@ -1,0 +1,4 @@
+apiVersion: v2
+name: myapp
+description: A Helm chart for PHP RESTful CRUD application
+version: 0.1.0
