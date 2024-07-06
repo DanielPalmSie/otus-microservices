@@ -6,11 +6,17 @@ $pass = getenv('DB_PASS');
 $port = getenv('DB_PORT');
 
 $dsn = "pgsql:host=$host;port=$port;dbname=$db;";
-$pdo = new PDO($dsn, $user, $pass, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+try {
+    $pdo = new PDO($dsn, $user, $pass, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+} catch (PDOException $e) {
+    http_response_code(500);
+    echo json_encode(['error' => 'Database connection failed: ' . $e->getMessage()]);
+    exit;
+}
 
 header('Content-Type: application/json');
 $method = $_SERVER['REQUEST_METHOD'];
-$request = explode('/', trim($_SERVER['PATH_INFO'],'/'));
+$request = isset($_SERVER['PATH_INFO']) ? explode('/', trim($_SERVER['PATH_INFO'], '/')) : [];
 $resource = array_shift($request);
 
 if ($resource !== 'users') {
@@ -56,6 +62,7 @@ switch ($method) {
         break;
 
     default:
-        echo json_encode(['status' => 'method not allowed']);
+        http_response_code(405);
+        echo json_encode(['error' => 'Method Not Allowed']);
         break;
 }

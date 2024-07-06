@@ -1,30 +1,30 @@
 version: '3.8'
 
 services:
-  php:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    volumes:
-      - .:/usr/src/myapp
-    stdin_open: true
-    tty: true
-    container_name: myapp_php
-    depends_on:
-      - db
-
   db:
     image: postgres:13
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: mydb
     volumes:
       - db_data:/var/lib/postgresql/data
-      - ./script.sql:/docker-entrypoint-initdb.d/script.sql
-    environment:
-      POSTGRES_DB: postgres
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
       - "5432:5432"
-    container_name: myapp_postgres
+
+  web:
+    build: .
+    depends_on:
+      - db
+    ports:
+      - "80:80"
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_NAME: mydb
+      DB_USER: user
+      DB_PASS: password
 
 volumes:
   db_data:

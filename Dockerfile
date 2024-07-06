@@ -1,16 +1,12 @@
-FROM php:8.3-cli
+FROM php:8.3-apache
 
-RUN apt-get update && \
-    apt-get install -y git && \
-    apt-get install -y libpq-dev && \
-    docker-php-ext-install pdo pdo_pgsql && \
-    rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y libpq-dev && docker-php-ext-install pdo pdo_pgsql
 
-RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
-    && php composer-setup.php --install-dir=/usr/local/bin --filename=composer \
-    && php -r "unlink('composer-setup.php');"
+# Включение mod_rewrite
+RUN a2enmod rewrite
 
-COPY src /var/www/html/
+COPY src/ /var/www/html/
 COPY init.sql /docker-entrypoint-initdb.d/
+COPY src/apache2.conf /etc/apache2/sites-available/000-default.conf
 
-WORKDIR /var/www/html/
+EXPOSE 80
