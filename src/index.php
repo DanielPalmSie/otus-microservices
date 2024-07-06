@@ -1,4 +1,5 @@
 <?php
+
 $host = getenv('DB_HOST');
 $db = getenv('DB_NAME');
 $user = getenv('DB_USER');
@@ -9,14 +10,17 @@ $dsn = "pgsql:host=$host;port=$port;dbname=$db;";
 try {
     $pdo = new PDO($dsn, $user, $pass, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
 } catch (PDOException $e) {
+    header('Content-Type: application/json');
     http_response_code(500);
     echo json_encode(['error' => 'Database connection failed: ' . $e->getMessage()]);
     exit;
 }
 
 header('Content-Type: application/json');
+
 $method = $_SERVER['REQUEST_METHOD'];
-$request = isset($_SERVER['PATH_INFO']) ? explode('/', trim($_SERVER['PATH_INFO'], '/')) : [];
+$requestUri = $_SERVER['REQUEST_URI'];
+$request = explode('/', trim(parse_url($requestUri, PHP_URL_PATH), '/'));
 $resource = array_shift($request);
 
 if ($resource !== 'users') {
