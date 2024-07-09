@@ -1,4 +1,4 @@
-apiVersion: v2
-name: myapp
-description: A Helm chart for PHP RESTful CRUD application
+apiVersion: v1
+description: A Helm chart for Kubernetes
+name: php-app
 version: 0.1.0

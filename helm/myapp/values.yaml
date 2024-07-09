@@ -1,18 +1,11 @@
-image:
-  repository: my_restful_crud
-  tag: latest
+persistence:
+  existingClaim: postgresql-pv-claim
 
-service:
-  type: ClusterIP
-  port: 80
-
-ingress:
+volumePermissions:
   enabled: true
-  className: nginx
-  annotations: {}
-  hosts:
-    - host: arch.homework
-      paths:
-        - path: /
-          pathType: Prefix
-  tls: []
+
+postgresql:
+  postgresqlUsername: user
+  postgresqlPassword: password
+  postgresqlDatabase: postgres
+  postgresqlPort: 5432

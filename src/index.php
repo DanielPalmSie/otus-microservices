@@ -1,10 +1,10 @@
 <?php
 
-$host = getenv('DB_HOST');
-$db = getenv('DB_NAME');
-$user = getenv('DB_USER');
-$pass = getenv('DB_PASS');
-$port = getenv('DB_PORT');
+$host = getenv('DATABASE_HOST');
+$db = getenv('DATABASE_NAME');
+$user = getenv('DATABASE_USER');
+$pass = getenv('DATABASE_PASSWORD');
+$port = getenv('DATABASE_PORT');
 
 $dsn = "pgsql:host=$host;port=$port;dbname=$db;";
 try {
@@ -45,16 +45,16 @@ switch ($method) {
 
     case 'POST':
         $data = json_decode(file_get_contents('php://input'), true);
-        $stmt = $pdo->prepare("INSERT INTO users (name, email, age) VALUES (?, ?, ?)");
-        $stmt->execute([$data['name'], $data['email'], $data['age']]);
+        $stmt = $pdo->prepare("INSERT INTO users (name, email) VALUES (?, ?)");
+        $stmt->execute([$data['name'], $data['email']]);
         echo json_encode(['id' => $pdo->lastInsertId()]);
         break;
 
     case 'PUT':
         $id = (int) $request[0];
         $data = json_decode(file_get_contents('php://input'), true);
-        $stmt = $pdo->prepare("UPDATE users SET name = ?, email = ?, age = ? WHERE id = ?");
-        $stmt->execute([$data['name'], $data['email'], $data['age'], $id]);
+        $stmt = $pdo->prepare("UPDATE users SET name = ?, email = ? WHERE id = ?");
+        $stmt->execute([$data['name'], $data['email'], $id]);
         echo json_encode(['status' => 'success']);
         break;
 
