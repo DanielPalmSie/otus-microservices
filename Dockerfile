@@ -1,11 +1,28 @@
 FROM php:8.3-apache
 
-RUN apt-get update && apt-get install -y libpq-dev && docker-php-ext-install pdo pdo_pgsql
+RUN echo 'Acquire::http::Pipeline-Depth 0;\nAcquire::http::No-Cache true;\nAcquire::BrokenProxy true;' > /etc/apt/apt.conf.d/99fixbadproxy
+
+
+RUN apt-get update && apt-get install -y \
+    libpq-dev \
+    git \
+    unzip \
+    && docker-php-ext-install pdo pdo_pgsql \
+    && pecl install apcu \
+    && docker-php-ext-enable apcu \
+    && rm -rf /var/lib/apt/lists/*
 
 RUN a2enmod rewrite
 
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
 COPY src/ /var/www/html/
-COPY init.sql /docker-entrypoint-initdb.d/
+
+WORKDIR /var/www/html
+COPY composer.json composer.lock /var/www/html/
+RUN composer install
+
+
 COPY src/apache2.conf /etc/apache2/sites-available/000-default.conf
 
 EXPOSE 80

@@ -1,1 +1,4 @@
 .idea
+helm/myapp/charts
+helm/myapp/Chart.lock
+vendor

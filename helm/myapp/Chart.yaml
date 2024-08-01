@@ -1,10 +1,7 @@
 apiVersion: v2
-name: my-postgresql-chart
-description: A Helm chart for deploying PostgreSQL
-type: application
+name: your-chart-name
+description: A Helm chart for Kubernetes
 version: 0.1.0
-appVersion: "14.1.0"
-
 dependencies:
   - name: postgresql
     version: 12.1.9

@@ -1,0 +1,17 @@
+{
+    "name": "daniel/prometheus",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Daniel\\Prometheus\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "daniel"
+        }
+    ],
+    "require": {
+        "promphp/prometheus_client_php": "*"
+    }
+}
