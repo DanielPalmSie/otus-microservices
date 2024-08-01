@@ -4,6 +4,10 @@ metadata:
   name: postgresql-pv
   labels:
     type: local
+    app.kubernetes.io/managed-by: "Helm"
+  annotations:
+    meta.helm.sh/release-name: "myapp"
+    meta.helm.sh/release-namespace: "default"
 spec:
   storageClassName: manual
   capacity:

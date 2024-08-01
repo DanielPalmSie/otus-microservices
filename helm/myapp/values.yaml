@@ -1,11 +1,10 @@
 persistence:
   existingClaim: postgresql-pv-claim
-
-volumePermissions:
-  enabled: true
+  size: 10Gi
+  accessModes:
+    - ReadWriteOnce
 
 postgresql:
-  postgresqlUsername: user
-  postgresqlPassword: password
-  postgresqlDatabase: postgres
-  postgresqlPort: 5432
+  postgresqlDatabase: mydatabase
+  postgresqlUsername: myuser
+  postgresqlPassword: mypassword

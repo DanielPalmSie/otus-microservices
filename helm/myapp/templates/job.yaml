@@ -3,6 +3,7 @@ kind: Job
 metadata:
   name: db-migration
 spec:
+  ttlSecondsAfterFinished: 3600
   template:
     spec:
       containers:
