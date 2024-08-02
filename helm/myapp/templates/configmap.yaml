@@ -3,6 +3,6 @@ kind: ConfigMap
 metadata:
   name: app-config
 data:
-  DATABASE_HOST: "psql-test-postgresql"
+  DATABASE_HOST: "{{ .Release.Name }}-postgresql"
   DATABASE_PORT: "5432"
-  DATABASE_NAME: "postgres"
+  DATABASE_NAME: "{{ .Values.postgresql.auth.database }}"

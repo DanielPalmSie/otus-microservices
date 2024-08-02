@@ -20,3 +20,28 @@ postgresql:
       runAsUser: 1001
   volumePermissions:
     enabled: true
+
+kube-prometheus-stack:
+  prometheus:
+    prometheusSpec:
+      podMonitorSelectorNilUsesHelmValues: false
+      serviceMonitorSelectorNilUsesHelmValues: false
+      serviceMonitorSelector: { }
+
+ingress-nginx:
+  controller:
+    kind: DaemonSet
+    reportNodeInternalIp: true
+    hostPort:
+      enabled: true
+      ports:
+        http: 80
+        https: 443
+    service:
+      type: NodePort
+    metrics:
+      enabled: true
+      serviceMonitor:
+        additionalLabels:
+          release: prometheus
+        enabled: true
