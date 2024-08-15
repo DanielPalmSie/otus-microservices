@@ -25,4 +25,10 @@ RUN composer install
 
 COPY src/apache2.conf /etc/apache2/sites-available/000-default.conf
 
+WORKDIR /var/www/html
+
+# Установка зависимостей (если используете composer)
+# COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+# RUN composer install
+
 EXPOSE 80
