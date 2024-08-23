@@ -3,8 +3,6 @@ kind: Ingress
 metadata:
   name: php-app-ingress
   namespace: default
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   ingressClassName: nginx
   rules:
@@ -18,3 +16,10 @@ spec:
                 name: php-app-service
                 port:
                   number: 80
+          - path: /auth
+            pathType: Prefix
+            backend:
+              service:
+                name: auth-service
+                port:
+                  number: 81

@@ -2,14 +2,14 @@
 
 namespace App\Manager;
 
-use Daniel\AuthService\Entity\User;
+use App\Entity\User;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 
-class UserManager
+readonly class UserManager
 {
     public function __construct(
-        private readonly EntityManagerInterface      $entityManager,
+        private EntityManagerInterface $entityManager,
     ){}
 
     public function findUserByLogin(string $login): ?User

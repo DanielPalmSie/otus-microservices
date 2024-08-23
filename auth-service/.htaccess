@@ -1,0 +1,9 @@
+RewriteEngine On
+RewriteBase /
+
+# Ensure the request is not already routed to the PHP file
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Modify the rule to prevent loops by appending the captured path to the index.php
+RewriteRule ^(.*)$ /index.php [QSA,L]

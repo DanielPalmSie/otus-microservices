@@ -6,13 +6,13 @@ use App\Manager\UserManager;
 use Lexik\Bundle\JWTAuthenticationBundle\Encoder\JWTEncoderInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
-class AuthService
+readonly class AuthService
 {
     public function __construct(
-        private readonly UserManager $userManager,
-        private readonly UserPasswordHasherInterface $passwordHasher,
-        private readonly JWTEncoderInterface $jwtEncoder,
-        private readonly int $tokenTTL,
+        private UserManager                 $userManager,
+        private UserPasswordHasherInterface $passwordHasher,
+        private JWTEncoderInterface         $jwtEncoder,
+        private int                         $tokenTTL,
     )
     {
     }

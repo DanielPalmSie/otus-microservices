@@ -2,7 +2,7 @@
 
 namespace App\Repository;
 
-use Daniel\AuthService\Entity\User;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
