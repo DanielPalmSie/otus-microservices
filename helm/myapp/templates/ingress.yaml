@@ -3,6 +3,9 @@ kind: Ingress
 metadata:
   name: php-app-ingress
   namespace: default
+  annotations:
+    nginx.ingress.kubernetes.io/auth-url: "http://arch.homework/auth/v1/token/validate"
+    nginx.ingress.kubernetes.io/configuration-snippet: "proxy_set_header Authorization $http_authorization;"
 spec:
   ingressClassName: nginx
   rules:
@@ -16,10 +19,3 @@ spec:
                 name: php-app-service
                 port:
                   number: 80
-          - path: /auth
-            pathType: Prefix
-            backend:
-              service:
-                name: auth-service
-                port:
-                  number: 81

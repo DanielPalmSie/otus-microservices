@@ -45,3 +45,4 @@ ingress-nginx:
         additionalLabels:
           release: prometheus
         enabled: true
+    allowSnippetAnnotations: "true"
