@@ -5,7 +5,6 @@ metadata:
   namespace: default
   annotations:
     nginx.ingress.kubernetes.io/auth-url: "http://arch.homework/auth/v1/token/validate"
-    nginx.ingress.kubernetes.io/configuration-snippet: "proxy_set_header Authorization $http_authorization;"
 spec:
   ingressClassName: nginx
   rules:
