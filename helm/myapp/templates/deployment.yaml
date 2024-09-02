@@ -44,3 +44,23 @@ spec:
                 secretKeyRef:
                   name: db-secret
                   key: DATABASE_PASSWORD
+            - name: JWT_SECRET_KEY_CRUD
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: JWT_SECRET_KEY_CRUD
+            - name: JWT_PUBLIC_KEY_CRUD
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: JWT_PUBLIC_KEY_CRUD
+            - name: JWT_PASSPHRASE
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: JWT_PASSPHRASE
+            - name: JWT_TTL_SEC
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: JWT_TTL_SEC
